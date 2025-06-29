@@ -2,32 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invitación</title>
 </head>
 <body style="text-align:center; background-color:#dde9ea">
-  <img src="assets/invitacion.svg" style="max-width:100%;" onclick="document.getElementById('musica').play()">
+
+  <!-- Asegúrate de que este SVG tiene el ID correcto -->
+  <img id="playMusica" src="assets/invitacion.svg" style="max-width:100%; cursor: pointer;">
 
   <audio id="musica">
     <source src="audio/Lily James - A dream is A wish your Heart make Lyrics - Cinderella Soundtrack.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
+
+  <script>
+    const musica = document.getElementById('musica');
+    const botonPlay = document.getElementById('playMusica');
+
+    botonPlay.addEventListener('click', () => {
+      musica.play().catch((e) => {
+        console.log('Reproducción bloqueada:', e);
+        alert('Toca para permitir la música.');
+      });
+    });
+
+    musica.addEventListener('play', () => {
+      console.log('La música está sonando');
+    });
+
+    musica.addEventListener('pause', () => {
+      console.log('La música se ha pausado');
+    });
+  </script>
+
 </body>
 </html>
-<script>
-  const musica = document.getElementById('musica');
-  const botonPlay = document.getElementById('playMusica');
 
-  botonPlay.style.cursor = 'pointer'; // Opcional: cambia el cursor a "mano" al pasar el mouse
-
-  botonPlay.addEventListener('click', () => {
-    musica.play();
-  });
-
-  musica.addEventListener('play', function() {
-    console.log('La música está sonando');
-  });
-
-  musica.addEventListener('pause', function() {
-    console.log('La música se ha pausado');
-  });
-</script>
